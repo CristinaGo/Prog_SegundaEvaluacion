@@ -1,0 +1,23 @@
+@startuml
+skinparam actorStyle Hollow
+left to right direction
+actor "Administrativo reservas" as a
+actor Recepcionista
+actor Persona
+actor Cliente
+rectangle "Reservas Hotel" {
+  a -- (hace reserva)
+  Persona -- (hace reserva)
+  Cliente -- (hace reserva)
+  (hace reserva) .> (comprueba cliente): <<Include>>
+  (comprueba cliente) <.. (introducir datos) : <<Extend>>
+  (comprueba cliente) .> (cumplimentar reserva) : <<Include>>
+  (anular reserva) -- Cliente
+  (anular reserva) <.. (penaliza): <<Extend>>
+  Recepcionista -- (factura estancia)
+  Recepcionista -- (comprueba reserva)
+  Recepcionista -- (registra cliente)
+  Persona <|- Cliente
+}
+
+@enduml

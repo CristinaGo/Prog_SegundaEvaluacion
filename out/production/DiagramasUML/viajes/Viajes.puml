@@ -1,0 +1,35 @@
+@startuml
+
+title Viajes
+
+class Vuelos{
+    - Date fecha
+    - int numeroPlazas
+}
+class Aviones {
+    - String modelo
+    - int capacidad
+}
+
+Aviones "0..*" - "1" Vuelos: da soporte a
+
+class Persona {
+    - String nombre
+    - String apellidos
+    - Date fechaNacimiento
+    - Genero genero
+}
+
+class Billete {
+    - String asiento
+}
+
+Persona "0..*" -- "0..*" Vuelos
+(Persona, Vuelos) "1" .. "1" Billete
+
+enum Genero{
+    HOMBRE
+    MUJER
+    OTRO
+}
+@enduml

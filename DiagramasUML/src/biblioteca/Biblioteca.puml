@@ -1,0 +1,60 @@
+@startuml
+
+title Biblioteca
+
+class Libro {
+  - String nombre
+  - Tipo tipo
+  - String editorial
+  - Int añoPublicación
+}
+
+enum Tipo {
+  NOVELA
+  TEATRO
+  POESIA
+  ENSAYO
+  }
+
+class Copia {
+  - String id
+  - Estado estado
+}
+
+enum Estado {
+  EN_BIBLIOTECA
+  PRESTADO
+  CON_RETRASO
+  EN_REPARACION
+}
+
+Libro "1" --"1..*" Copia: tiene
+
+class Autor {
+  - String nombre
+  - String nacionalidad
+  - Date fechaNac
+}
+
+Libro "1..*" -- "0..*" Autor: escrito por
+
+class Prestamo {
+  - Date fechaInicio
+  - Date fechaFin
+  + prestar():void
+  + devolver():void
+}
+
+class Lector {
+  - String DNI
+}
+Copia "0..3"-- "0..1" Lector
+(Copia, Lector) "1" .. "1" Prestamo
+
+class Multa {
+  - Date fechaInicio
+  - Date fechaFin
+}
+Lector "1" - "0..3" Multa: es sancionado
+
+@enduml

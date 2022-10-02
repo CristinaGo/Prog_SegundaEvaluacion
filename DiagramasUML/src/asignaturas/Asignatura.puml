@@ -1,0 +1,15 @@
+@startuml
+skinparam actorStyle Hollow
+left to right direction
+actor Profesor
+actor Alumno
+rectangle EjercicioAsignatura {
+    Alumno --> (publica cambio)
+  Alumno --> (consultan peticiones)
+  (hace/pide cambio) <. (consultan peticiones) : <<Extend>>
+  (consultan peticiones) .> (deja cambio) : <<Extend>>
+  (Dar de alta) <--  Profesor
+  (proporciona listado) <-- Profesor
+}
+
+@enduml
